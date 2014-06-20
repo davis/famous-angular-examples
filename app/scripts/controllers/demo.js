@@ -17,7 +17,7 @@ angular.module('integrationApp')
     var strings = [
       'famo.us',
       'angular',
-      'javascript',
+      'java Script',
       'web',
       'wow',
       'such',

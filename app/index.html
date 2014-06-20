@@ -38,14 +38,14 @@
             <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
-
         <!-- TODO:  if window width is less than 385px, don't show the iphone (use media queries) -->
-        <div style="position: relative; width: 385px; margin: 0 auto;">
+        <div ng-controller="MainCtrl" style="position: relative; width: 385px; margin: 0 auto;">
             <img class="phone-frame" style="" src="images/iphone-5s-white-frame.png" />
-            <div class="phone-view-container"   ui-view></div>
+            <fa-app class="phone-view-container">
+                <fa-router>
+                </fa-router>
+            </fa-app>
         </div>
-
 
         <!--[if lt IE 9]>
         <script src="bower_components/es5-shim/es5-shim.js"></script>

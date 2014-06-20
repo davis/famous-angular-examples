@@ -5,8 +5,11 @@ angular.module('integrationApp')
     var EventHandler = $famous['famous/core/EventHandler'];
 
     $scope.evt = new EventHandler();
+
+    window.$famous = $famous;
     
     $scope.flip = function(){
+      console.log('flip');
       $famous.find('#flipper')[0].flip();
     }
 
