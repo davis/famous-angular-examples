@@ -3,8 +3,8 @@
 angular.module('integrationApp')
   .controller('DemoCtrl', function ($scope, $famous) {
     var GenericSync = $famous['famous/inputs/GenericSync'];
-    var Transitionable = $famous['famous/transitions/Transitionable']
-    var EventHandler = $famous['famous/core/EventHandler']
+    var Transitionable = $famous['famous/transitions/Transitionable'];
+    var EventHandler = $famous['famous/core/EventHandler'];
 
     var colors = [
       '#869B40',
@@ -44,6 +44,7 @@ angular.module('integrationApp')
       }
     });
 
+
     setInterval(function(){
       for(var i = 0; i < ELEMENTS; i++){
         $scope.surfs[i].content = _.sample(strings);
@@ -53,4 +54,6 @@ angular.module('integrationApp')
     }, 500);
 
     $scope.enginePipe = new EventHandler();
+    $scope.translate = new Transitionable
+
   });

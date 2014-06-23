@@ -13,7 +13,8 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
       })
       .state("animations", {
        // url: "/animations",
-        templateUrl: "views/animations.html",
+        templateUrl: "views/animations.html", 
+
         controller: "AnimationsCtrl"
       })
       .state("transitionables", {
@@ -21,7 +22,14 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
         templateUrl: "views/transitionables.html",
         controller: "TransitionablesCtrl"
       })
-      .state("demo", {
+      .state("flipper", {
+       // url: "/flipper",
+        templateUrl: "views/flipper.html",
+        controller: "FlipperCtrl",
+        inTransitionFrom : "inTransitionFunction($callback)",
+
+      })
+      .state("flipper.demo", {
        // url: "/demo",
         templateUrl: "views/demo.html"
       })
