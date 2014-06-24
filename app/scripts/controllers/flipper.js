@@ -26,16 +26,15 @@ angular.module('integrationApp')
       $famous.find('#flipper')[0].flip();
     }
 
-    $scope.iconTrans = []
-    $scope.scale = new Transitionable(0);
+    $scope.trans = new Transitionable(0);
     $scope.inTransitionFunction = function (callback) {
-      $scope.scale.set(1, transition, function() {
+      $scope.trans.set(1, transition, function() {
           console.log('i"m in');
           callback();
       });
     };
     $scope.outTransitionFunction = function (callback) {
-      $scope.scale.set(0, {duration: 1000, curve:'linear'}, function() {
+      $scope.trans.set(0, {duration: 1000, curve:'linear'}, function() {
           console.log('i\'m out');
           callback();
       });
