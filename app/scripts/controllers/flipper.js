@@ -28,13 +28,13 @@ angular.module('integrationApp')
 
     $scope.trans = new Transitionable(0);
     $scope.inTransitionFunction = function (callback) {
-      $scope.trans.set(1, transition, function() {
+      $scope.trans.set(0.5, transition, function() {
           console.log('i"m in');
           callback();
       });
     };
     $scope.outTransitionFunction = function (callback) {
-      $scope.trans.set(0, {duration: 1000, curve:'linear'}, function() {
+      $scope.trans.set(1, {duration: 1000, curve:'linear'}, function() {
           console.log('i\'m out');
           callback();
       });
