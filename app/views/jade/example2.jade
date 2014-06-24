@@ -1,0 +1,11 @@
+fa-modifier(fa-translate='transitionStates.screenTranslate', fa-origin='[0.5, 0.5]', fa-align='[0.5, 0.5]')
+    fa-view(fa-pipe-from='evt', fa-click='flip()')
+        fa-flipper#flipper
+          fa-view#front
+            fa-surface(fa-background-color='\'#FF0000\'', fa-pipe-to='evt') demo
+            fa-modifier(fa-origin='[0.5, 0]', fa-align='[0.5, 0]', fa-translate='transitionStates.clockTranslate')
+              fa-surface(fa-color='\'white\'') 11:06 PM
+            fa-modifier(ng-repeat='icon in transitionStates.iconTranslate', fa-origin='[0, 0]', fa-align='[0, 0]', fa-translate='icon')
+              fa-surface(fa-background-color='\'#333\'', fa-size='[50, 50]') icon
+          fa-view#back
+            fa-surface(fa-background-color='\'#0000FF\'', fa-pipe-to='evt') Back
