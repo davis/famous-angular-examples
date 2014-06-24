@@ -30,6 +30,20 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
         inTransitionFrom : "inTransitionFunction($callback)",
         outTransitionTo: "outTransitionFunction($callback)"
       })
+      .state("example1" , {
+        // url: "/example1",
+        templateUrl: "views/example1.html",
+        controller: "ExampleCtrl",
+        inTransitionFrom: "exampleIn1($callback)",
+        outTransitionTo: "exampleOut1($callback)"
+      })
+      .state("example2" , {
+        // url: "/example2",
+        templateUrl: "views/example2.html",
+        controller: "ExampleCtrl",
+        inTransitionFrom: "exampleIn2($callback)",
+        outTransitionTo: "exampleOut2($callback)"
+      })
       .state("flipper.demo", {
        // url: "/demo",
         templateUrl: "views/demo.html"
