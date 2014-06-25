@@ -1,5 +1,7 @@
 'use strict';
 
+//
+
 angular.module('integrationApp')
 
 .controller('UntidyCtrl1', function ($scope, $famous, $timeout) {
@@ -59,12 +61,12 @@ angular.module('integrationApp')
         X: new Transitionable(0),
         Y: new Transitionable(0),
         translate: function() {
-          return [0 - 310 * $scope.bars[i].X.get(), 550 - ( 625 * $scope.bars[i].Y.get() - 100 * i ), 2];
+          return [0 - 310 * this.X.get(), 550 - ( 625 * this.Y.get() - 100 * i ), 2];
         },
         opacity: function() {
           // hacky way to hide bars until screenScale hits full
           if($scope.bars[i].Y.get() > 0.4) {
-            return $scope.bars[i].Y.get();
+            return this.Y.get();
           }
           return 0;
         },
