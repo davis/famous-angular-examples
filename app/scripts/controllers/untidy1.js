@@ -2,7 +2,7 @@
 
 angular.module('integrationApp')
 
-.controller('ExampleCtrl1', function ($scope, $famous, $timeout) {
+.controller('UntidyCtrl1', function ($scope, $famous, $timeout) {
   var Transitionable   = $famous['famous/transitions/Transitionable'];
   var SpringTransition = $famous['famous/transitions/SpringTransition'];
   var EventHandler     = $famous['famous/core/EventHandler'];
