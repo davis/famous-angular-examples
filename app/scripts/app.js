@@ -72,6 +72,32 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
        // url: "/flipper",
         templateUrl: "views/flipper.html",
         controller: "FlipperCtrl"
+      })
+      .state('untidy1', {
+        url: '/untidy1',
+        templateUrl: 'views/untidy1.html',
+        controller: 'UntidyCtrl1',
+        inTransitionFrom: {
+          untidy2: 'from.untidy2',
+          default: 'from.default'
+        },
+        outTransitionTo: {
+          untidy2: 'to.untidy2',
+          default: 'to.default'
+        }
+      })
+      .state('untidy2', {
+        url: '/untidy2',
+        templateUrl: 'views/untidy2.html',
+        controller: 'UntidyCtrl2',
+        inTransitionFrom: {
+          untidy1: 'from.untidy1',
+          default: 'from.default'
+        },
+        outTransitionTo: {
+          untidy1: 'to.untidy1',
+          default: 'to.default'
+        }
       });
     })
   .controller('MainCtrl',function($scope, $famousState){
