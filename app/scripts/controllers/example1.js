@@ -25,12 +25,15 @@ angular.module('integrationApp')
 
   var screenTransitionable = new Transitionable(0);
   var clockTransitionable  = new Transitionable(0);
+  var barsTransitionable   = new Transitionable(0);
 
   $scope.transitionStates = {
     screenScale: function() { return [screenTransitionable.get(), screenTransitionable.get(), 1]; },
     titleTranslate: [130, 35, 0],
-    hamburgerTranslate: [-115, -230, 0],
-    arrowTranslate: [115, -230, 0]
+    hamburgerTranslate: [-115, -230, 2],
+    arrowTranslate: [115, -230, 2],
+    searchTranslate: [0, -165, 4],
+    barsTranslate: function() { return [0, 45 * barsTransitionable.get(), 2]; }
   };
 
   // define bars
@@ -40,8 +43,9 @@ angular.module('integrationApp')
     (function(i){
       $scope.bars[i] = {};
       $scope.bars[i].transitionable = new Transitionable(0);
+      $scope.bars[i].exTrans = new Transitionable(0);
       $scope.bars[i].translate = function() {
-        return [0, 550 - ( 625 * $scope.bars[i].transitionable.get() - 100 * i ), 0];
+        return [0, 550 - ( 625 * $scope.bars[i].transitionable.get() - 100 * i ), 2];
       };
       $scope.bars[i].opacity = function() {
         // hacky way to hide bars until screenScale hits full
@@ -61,33 +65,30 @@ angular.module('integrationApp')
   $scope.bars[2].bgCol = '#3BA686';
   $scope.bars[3].bgCol = '#5F6F8C';
 
-  // // icon bars
-  // $scope.bars[0].content = '<i class="fa fa-phone"></i>';
-  // $scope.bars[1].content = '<i class="fa fa-envelope"></i>';
-  // $scope.bars[2].content = '<i class="fa fa-cloud"></i>';
-  // $scope.bars[3].content = '<i class="fa fa-camera"></i>';
-
   $scope.inTransitionFunction = function (done) {
-    // set screen
-    screenTransitionable.set(1, {
-      curve: Easing.inOutSine,
-      duration: 500
-    }, function() {
-        console.log('screenTranslate finished');
-    });
-    // set bars
-    for(var i = 0; i < bars; i++) {
-      (function(i) {
-        Timer.setTimeout(function() {
-          $scope.bars[i].transitionable.set(1, springTransition2, function() {
-            if(i+1 === bars) {
-              console.log('i\'m done');
-              done();
-            }
-          });
-        }, 1000 + (100 * i));
-      })(i);
+    function _transition() {
+      // set screen
+      screenTransitionable.set(1, {
+        curve: Easing.inOutSine,
+        duration: 500
+      }, function() {
+          console.log('screenTranslate finished');
+      });
+      // set bars
+      for(var i = 0; i < bars; i++) {
+        (function(i) {
+          Timer.setTimeout(function() {
+            $scope.bars[i].transitionable.set(1, springTransition2, function() {
+              if(i+1 === bars) {
+                console.log('i\'m done');
+                done();
+              }
+            });
+          }, 1000 + (100 * i));
+        })(i);
+      }
     }
+    Timer.setTimeout(_transition, 500);
   };
 
   // expose to window for test
@@ -118,4 +119,22 @@ angular.module('integrationApp')
   };
 
   $scope.flip=function(){}; // not sure if still needed
+
+  var _expanded = false;
+  window.expand = $scope.expand = function() {
+    console.log('toggle expand');
+    if(!_expanded) {
+      barsTransitionable.set(1, {
+        curve: Easing.outBack,
+        duration: 250
+      });
+    } else {
+      barsTransitionable.set(0, {
+        curve: Easing.outBack,
+        duration: 250
+      });
+    }
+
+    _expanded = !_expanded;
+  }; 
 });
