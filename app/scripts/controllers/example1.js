@@ -102,11 +102,14 @@ angular.module('integrationApp')
           }, function() {
             if(i+1 === bars) {
               console.log('i\'m done');
-              // // set screen
-              // screenTransitionable.set(1, springTransition1, function() {
-              //   console.log('i\'m out');
-              //   done();
-              // });
+              // set screen
+              screenTransitionable.set(0, {
+                curve: Easing.inOutSine,
+                duration: 500
+              }, function() {
+                console.log('i\'m out');
+                done();
+              });
             }
           });
         }, (50 * i) - 50);
