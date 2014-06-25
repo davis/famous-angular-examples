@@ -1,18 +1,18 @@
-fa-modifier(fa-scale='transitionStates.screenScale' fa-origin='[0.5, 0.5]' fa-align='[0.5, 0.5]')
+fa-modifier(fa-scale='states.screenScale' fa-origin='[0.5, 0.5]' fa-align='[0.5, 0.5]')
   fa-view(fa-pipe-from='evt', fa-click='expand()')
       fa-flipper#flipper
         fa-view#front
           fa-modifier(fa-translate='[0, 0, 1]')
-            fa-surface(fa-background-color='\'#FFF2D8\'', fa-pipe-to='evt')
-          fa-modifier(fa-translate='transitionStates.titleTranslate')
+            fa-surface(fa-background-color='\'#333\'', fa-pipe-to='evt')
+          fa-modifier(fa-translate='states.titleTranslate')
             fa-surface#title() Untidy
-          fa-modifier(fa-translate='transitionStates.hamburgerTranslate')
+          fa-modifier(fa-translate='states.hamburgerTranslate')
             fa-surface(fa-background-color='\'#FF9C2F\'', fa-size='[40, 40]', fa-color='\'white\'')  <i class="fa fa-bars fa-2x"></i>
-          fa-modifier(fa-translate='transitionStates.arrowTranslate')
+          fa-modifier(fa-translate='states.arrowTranslate')
             fa-surface(fa-background-color='\'white\'', fa-size='[40, 40]', fa-color='\'#FF9C2F\'')  <i class="fa fa-arrow-right fa-2x"></i>
-          fa-modifier(fa-translate='transitionStates.searchTranslate')
+          fa-modifier(fa-translate='states.searchTranslate')
             fa-surface(fa-background-color='\'white\'', fa-size='[280, 30]', fa-color='\'#222\'', fa-click='expand') <i class="fa fa-search"></i> searchbar
-          fa-modifier(fa-translate='transitionStates.barsTranslate')
+          fa-modifier(fa-translate='states.barsTranslate')
             fa-modifier(ng-repeat='bar in bars', fa-translate='bar.translate' fa-opacity='bar.opacity', fa-rotate-z='bar.rotate')
               fa-surface(fa-background-color='bar.bgCol', fa-size='[undefined, 80]')
         fa-view#back
