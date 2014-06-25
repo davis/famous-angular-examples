@@ -90,7 +90,10 @@ angular.module('integrationApp')
             if(i+1 === icons) {
               console.log('i\'m done');
               // set screen
-              screenTransitionable.set(1, springTransition1, function() {
+              screenTransitionable.set(1, {
+                curve: Easing.inOutSine,
+                duration: 400
+              }, function() {
                 console.log('i\'m out');
                 done();
               });
@@ -101,5 +104,8 @@ angular.module('integrationApp')
     }
   };
 
-  $scope.flip=function(){}; // not sure if still needed
+  $scope.flip = function() {
+    console.log('flip');
+    $famous.find('#flipper')[0].flip();
+  }; // not sure if still needed
 });

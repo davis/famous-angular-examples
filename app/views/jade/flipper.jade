@@ -4,7 +4,7 @@ fa-modifier(fa-translate='transitionStates.screenTranslate', fa-origin='[0.5, 0.
         fa-view#front
           fa-surface(fa-background-color='\'white\'', fa-pipe-to='evt')
           fa-modifier(fa-origin='[0.5, 0]', fa-align='[0.5, 0]', fa-translate='transitionStates.clockTranslate')
-            fa-surface(fa-color='\'white\'')
+            fa-surface(fa-color='\'white\'', fa-pipe-to='evt')
           fa-modifier(ng-repeat='icon in icons' fa-origin='[0, 0]', fa-align='[0, 0]', fa-translate='icon.translate')
             fa-surface(fa-background-color='icon.bgCol', fa-color='\'white\'', fa-size='[50, 50]')
               i(ng-class='icon.icon') 
