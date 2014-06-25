@@ -52,10 +52,10 @@ angular.module('integrationApp')
   $scope.icons[3].bgCol = '#5F6F8C';
 
   // icon icons
-  $scope.icons[0].content = '<i class="fa fa-phone"></i>';
-  $scope.icons[1].content = '<i class="fa fa-envelope"></i>';
-  $scope.icons[2].content = '<i class="fa fa-cloud"></i>';
-  $scope.icons[3].content = '<i class="fa fa-camera"></i>';
+  $scope.icons[0].icon = 'fa fa-phone';
+  $scope.icons[1].icon = 'fa fa-envelope';
+  $scope.icons[2].icon = 'fa fa-cloud';
+  $scope.icons[3].icon = 'fa fa-camera';
 
   $scope.inTransitionFunction = function (done) {
     // set screen
