@@ -40,9 +40,9 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
       .state("example2" , {
         // url: "/example2",
         templateUrl: "views/example2.html",
-        controller: "ExampleCtrl",
-        inTransitionFrom: "exampleIn2($callback)",
-        outTransitionTo: "exampleOut2($callback)"
+        controller: "ExampleCtrl2",
+        inTransitionFrom: "inTransitionFunction($callback)",
+        outTransitionTo: "outTransitionFunction($callback)"
       })
       .state("flipper.demo", {
        // url: "/demo",
