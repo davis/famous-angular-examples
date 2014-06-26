@@ -2,11 +2,13 @@ fa-modifier(fa-translate='states.screenTranslate', fa-origin='[0.5, 0.5]', fa-al
   fa-view(fa-pipe-from='evt', fa-click='flip()')
       fa-flipper#flipper
         fa-view#front
-          fa-surface(fa-background-color='\'white\'', fa-pipe-to='evt')
-          fa-modifier(fa-origin='[0.5, 0]', fa-align='[0.5, 0]', fa-translate='states.clockTranslate')
-            fa-surface#background(fa-z-index='100', fa-color='\'white\'', fa-pipe-to='evt')
-          fa-modifier(ng-repeat='icon in icons' fa-origin='[0, 0]', fa-align='[0, 0]', fa-translate='icon.translate')
-            fa-surface#icon(fa-z-index='200', fa-background-color='icon.bgCol', fa-color='\'white\'', fa-size='[50, 50]')
-              i(ng-class='icon.icon')
+          fa-image-surface#background(fa-image-url='/images/fa-router-examples/grey.jpg', fa-pipe-to='evt')
+          //- fa-modifier(fa-origin='[0.5, 0]', fa-align='[0.5, 0]', fa-translate='states.clockTranslate')
+          //-   fa-surface(fa-z-index='100', fa-color='\'white\'', fa-pipe-to='evt')
+          fa-modifier(ng-repeat='icon in icons', fa-translate='icon.translate')
+            fa-surface#iconbg(fa-z-index='200', fa-background-color='icon.bgCol', fa-size='[50, 50]')
+            fa-modifier(fa-origin='[0.5, 0.5]', fa-align='[0.5, 0.5]')
+              fa-surface#icon(fa-z-index='201', fa-color='\'white\'', fa-size='[true, true]')
+                i(ng-class='icon.icon')
         fa-view#back
-          fa-surface
+          fa-surface(fa-background-color='\'#222\'', fa-pipe-to='evt')
