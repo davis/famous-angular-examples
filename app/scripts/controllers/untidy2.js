@@ -4,7 +4,7 @@
 
 angular.module('integrationApp')
 
-.controller('UntidyCtrl2', function($scope, $famous, $timeout) {
+.controller('UntidyCtrl2', function($scope, $famous, $timeout, $famousState) {
   var Transitionable   = $famous['famous/transitions/Transitionable'];
   var SpringTransition = $famous['famous/transitions/SpringTransition'];
   var EventHandler     = $famous['famous/core/EventHandler'];
@@ -47,9 +47,12 @@ angular.module('integrationApp')
       // set screen
       t9ables.screenOpacity.set(1, TRANSITIONS.inOutSine500, function(){
         done();
+        Timer.setTimeout(function() {
+          $famousState.go('untidy1');
+        }, 750);
       });
     },
-    default: function (done) {
+    default: function(done) {
       // initialize
       t9ables.screenOpacity.set(1);
 
