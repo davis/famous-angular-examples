@@ -4,15 +4,17 @@ fa-modifier(fa-scale='states.screenScale' fa-origin='[0.5, 0.5]' fa-align='[0.5,
         fa-view#front
           fa-surface#background(fa-z-index='100', fa-background-color='\'#333\'', fa-pipe-to='evt')
           fa-modifier(fa-translate='states.titleTranslate')
-            fa-surface#title(fa-z-index='200') Untidy
+            fa-surface.title(fa-z-index='200', fa-color='\'white\'') Untidy
           fa-modifier(fa-translate='states.hamburgerTranslate')
-            fa-surface#hamburger(fa-z-index='200',fa-background-color='\'#FF9C2F\'', fa-size='[40, 40]', fa-color='\'white\'')
-              i(class='fa fa-bars fa-2x')
+            fa-surface#hamburgerbg(fa-z-index='200', fa-background-color='\'#FF9C2F\'', fa-size='[40, 40]')
+            fa-surface#hamburger(fa-z-index='201', fa-color='\'white\'', fa-size='[true, true]', fa-pipe-to='evt', fa-click='openMenu')
+              i(class='fa fa-bars icon-sm')
           fa-modifier(fa-translate='states.arrowTranslate')
-            fa-surface#arrow(fa-z-index='200', fa-background-color='\'white\'', fa-size='[40, 40]', fa-color='\'#FF9C2F\'')
-              i(class='fa fa-arrow-right fa-2x')
+            fa-surface#arrowbg(fa-z-index='200', fa-background-color='\'white\'', fa-size='[40, 40]')
+            fa-surface#arrow(fa-z-index='201', fa-color='\'#333\'', fa-size='[true, true]')
+              i(class='fa fa-angle-right icon-sm')
           fa-modifier(fa-translate='states.searchTranslate')
-            fa-surface#search(fa-z-index='200', fa-background-color='\'white\'', fa-size='[280, 30]', fa-color='\'#222\'', fa-click='expand')
+            fa-surface#search(fa-z-index='200', fa-background-color='\'white\'', fa-size='[280, 30]', fa-color='\'#222\'', fa-pipe-to='evt', fa-click='expand')
               i(class='fa fa-search') searchbar
           fa-modifier(fa-translate='states.barsTranslate')
             fa-modifier(ng-repeat='bar in bars', fa-translate='bar.translate' fa-opacity='bar.opacity', fa-rotate-z='bar.rotate')

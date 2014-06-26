@@ -4,7 +4,7 @@
 
 angular.module('integrationApp')
 
-.controller('UntidyCtrl1', function ($scope, $famous, $timeout) {
+.controller('UntidyCtrl1', function($scope, $famous, $famousState, $timeout) {
   var Transitionable   = $famous['famous/transitions/Transitionable'];
   var SpringTransition = $famous['famous/transitions/SpringTransition'];
   var EventHandler     = $famous['famous/core/EventHandler'];
@@ -25,7 +25,11 @@ angular.module('integrationApp')
       t9ables.barsTransitionable.set(0, TRANSITIONS.outBack250);
     }
     _expanded = !_expanded;
-  }; 
+  };
+
+  $scope.openMenu = function() {
+    $famousState.go('untidy1.menu');
+  };
 
   // make some useful transitions available
   var TRANSITIONS = {
@@ -47,9 +51,9 @@ angular.module('integrationApp')
   $scope.states = {
     screenScale: function() { return [t9ables.screenScale.get(), t9ables.screenScale.get(), 1]; },
     barsTranslate: function() { return [0, 45 * t9ables.barsTransitionable.get(), 0]; },
-    titleTranslate: [130, 35, 0],
-    hamburgerTranslate: [-115, -230, 0],
-    arrowTranslate: [115, -230, 0],
+    titleTranslate: [112, 20, 0],
+    hamburgerTranslate: [-118, -235, 0],
+    arrowTranslate: [118, -235, 0],
     searchTranslate: [0, -165, 0]
   };
 
@@ -99,7 +103,8 @@ angular.module('integrationApp')
         })(i);
       }
     },
-    default: function (done) {
+    untidymenu: function(done) { done (); },
+    default: function(done) {
       Timer.setTimeout(function() {
         // set screen
         t9ables.screenScale.set(1, TRANSITIONS.inOutSine500, function() {
@@ -128,12 +133,13 @@ angular.module('integrationApp')
         (function(i) {
           Timer.setTimeout(function() {
             $scope.bars[i].X.set(1, TRANSITIONS.inBack800, function() {
-              if(i === bars-1) done();
+              // if(i === bars-1) done();
             });
           }, 100*i);
         })(i);
       }
     },
+    untidymenu: function(done) {},
     default: function (done) {
       // set bars
       for(var i = 0; i < bars; i++) {
