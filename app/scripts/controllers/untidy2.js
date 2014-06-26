@@ -1,8 +1,10 @@
 'use strict';
 
+//
+
 angular.module('integrationApp')
 
-.controller('UntidyCtrl2', function ($scope, $famous, $timeout) {
+.controller('UntidyCtrl2', function($scope, $famous, $timeout) {
   var Transitionable   = $famous['famous/transitions/Transitionable'];
   var SpringTransition = $famous['famous/transitions/SpringTransition'];
   var EventHandler     = $famous['famous/core/EventHandler'];
@@ -11,87 +13,71 @@ angular.module('integrationApp')
   var Timer            = $famous['famous/utilities/Timer'];
 
   Transitionable.registerMethod('spring', SpringTransition);
-
-  var springTransition1 = {
-      method: 'spring',  period: 1500,
-      dampingRatio: 0.6, velocity: 0.003
-  };
-  var springTransition2 = {
-      method: "spring",  period: 1300,
-      dampingRatio: 0.8, velocity: 0.004
-  };
-
   $scope.evt = new EventHandler();
 
-  var screenTransitionable = new Transitionable(0);
-  var clockTransitionable  = new Transitionable(0);
-  var barsTransitionable   = new Transitionable(0);
+  // make some useful transitions available
+  var TRANSITIONS = {
+    inBack800:        { curve: Easing.inBack, duration: 800 },
+    inOutSine500:     { curve: Easing.inOutSine, duration: 500 },
+    outBack250:       { curve: Easing.outBack, duration: 250 },
+    springTransition: { method: "spring", period: 1300, dampingRatio: 0.8, velocity: 0.004 }
+  };
 
-  $scope.transitionStates = {
-    screenOpacity: function() { return screenTransitionable.get(); },
+  var t9ables = {
+    screenOpacity: new Transitionable(0),
+    screenScale:   new Transitionable(0)
+  };
+
+  $scope.states = {
+    screenOpacity: function() { return t9ables.screenOpacity.get(); },
+    screenScale: function() { return [t9ables.screenScale.get(), t9ables.screenScale.get(), 1]; },
     titleTranslate: [130, 35, 0],
-    hamburgerTranslate: [-115, -230, 2],
-    arrowTranslate: [115, -230, 2],
-    searchTranslate: [0, -165, 4],
+    hamburgerTranslate: [-115, -230, 0],
+    arrowTranslate: [115, -230, 0],
+    searchTranslate: [0, -165, 0],
+    loadingTranslate: [0, 0, 0]
   };
 
-  $scope.inTransitionFunction = function (done) {
-    function _transition() {
+  // in transitions
+  $scope.from = {
+    untidy1: function(done) {
+      // initialize
+      t9ables.screenScale.set(1); // TODO: find some better way to 'initialize'
+
       // set screen
-      screenTransitionable.set(1, {
-        curve: Easing.inOutSine,
-        duration: 500
-      }, function() {
-          console.log('screenOpacitate finished');
+      t9ables.screenOpacity.set(1, TRANSITIONS.inOutSine500, function(){
+        done();
       });
+    },
+    default: function (done) {
+      // initialize
+      t9ables.screenOpacity.set(1);
+
+      Timer.setTimeout(function() {
+        // set screen
+        t9ables.screenScale.set(1, TRANSITIONS.inOutSine500, function() {
+          done();
+        });
+      }, 1000);
     }
-    _transition();
   };
 
-  // expose to window for test
-  window.flipperOut = $scope.outTransitionFunction = function (done) {
-    // // set bars
-    // for(var i = 0; i < bars; i++) {
-    //   (function(i) {
-    //     Timer.setTimeout(function() {
-    //       $scope.bars[i].transitionable.set(0, {
-    //         curve: Easing.inBack,
-    //         duration: 800
-    //       }, function() {
-    //         if(i+1 === bars) {
-    //           console.log('i\'m done');
-    //           // set screen
-    //           screenTransitionable.set(0, {
-    //             curve: Easing.inOutSine,
-    //             duration: 500
-    //           }, function() {
-    //             console.log('i\'m out');
-    //             done();
-    //           });
-    //         }
-    //       });
-    //     }, (50 * i) - 50);
-    //   })(i);
-    // }
+  // out transitions
+  $scope.to = {
+    untidy1: function(done) {
+      Timer.setTimeout(function() {
+        t9ables.screenOpacity.set(0, TRANSITIONS.inOutSine500, function() {
+          done();
+        });
+      }, 0);
+    },
+    default: function(done) {
+      Timer.setTimeout(function() {
+        // set screen
+        t9ables.screenScale.set(0, TRANSITIONS.inOutSine500, function() {
+          done();
+        });
+      }, 800);
+    }
   };
-
-  $scope.flip=function(){}; // not sure if still needed
-
-  // var _expanded = false;
-  // window.expand = $scope.expand = function() {
-  //   console.log('toggle expand');
-  //   if(!_expanded) {
-  //     barsTransitionable.set(1, {
-  //       curve: Easing.outBack,
-  //       duration: 250
-  //     });
-  //   } else {
-  //     barsTransitionable.set(0, {
-  //       curve: Easing.outBack,
-  //       duration: 250
-  //     });
-  //   }
-
-  //   _expanded = !_expanded;
-  // }; 
 });
