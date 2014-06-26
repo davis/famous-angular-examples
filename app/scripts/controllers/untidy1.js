@@ -15,9 +15,19 @@ angular.module('integrationApp')
   Transitionable.registerMethod('spring', SpringTransition);
   $scope.evt = new EventHandler();
 
-  var _expanded;
+  // TODO: get working with clicks
+  $scope.handleClick = function($event) {
+    console.log($event.origin)
+    if($event.origin.id === 3) {
+      $scope.openMenu();
+    } else {
+      $scope.expand();
+    }
+  };
+
   // TODO: fix expand
-  window.expand = $scope.expand = function() {
+  var _expanded;
+  $scope.expand = function() {
     console.log('toggle expand');
     if(!_expanded) {
       t9ables.barsTransitionable.set(1, TRANSITIONS.outBack250);
@@ -27,6 +37,7 @@ angular.module('integrationApp')
     _expanded = !_expanded;
   };
 
+  // TODO: tie to click
   $scope.openMenu = function() {
     $famousState.go('untidy1.menu');
   };
