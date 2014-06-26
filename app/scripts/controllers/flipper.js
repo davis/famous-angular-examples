@@ -13,24 +13,32 @@ angular.module('integrationApp')
   var Timer            = $famous['famous/utilities/Timer'];
 
   Transitionable.registerMethod('spring', SpringTransition);
-
-  var springTransition1 = {
-      method: 'spring',  period: 1500,
-      dampingRatio: 0.6, velocity: 0.003
-  };
-  var springTransition2 = {
-      method: "spring",  period: 1500,
-      dampingRatio: 0.5, velocity: 0.004
-  };
-
   $scope.evt = new EventHandler();
 
-  var screenTransitionable = new Transitionable(0);
-  var clockTransitionable  = new Transitionable(0);
+  window.flip = $scope.flip = function() {
+    console.log('flip');
+    $famous.find('#flipper')[0].flip();
+  };
 
-  $scope.transitionStates = {
-    screenTranslate: function() { return [620 * screenTransitionable.get() - 310, 0, 0]; },
-    clockTranslate: function() { return [0, 200 * clockTransitionable.get(), 0]; },
+  // make some useful transitions available
+  var TRANSITIONS = {
+    inBack800:         { curve: Easing.inBack, duration: 800 },
+    inOutSine500:      { curve: Easing.inOutSine, duration: 500 },
+    outBack250:        { curve: Easing.outBack, duration: 250 },
+    springTransition:  { method: "spring", period: 1500, dampingRatio: 0.8, velocity: 0.003 },
+    springTransition2: { method: "spring", period: 1500, dampingRatio: 0.8, velocity: 0.004 }
+  };
+
+  // initialize transitionables
+  var t9ables = {
+    screenTranslate: new Transitionable(0),
+    clocktranslate:  new Transitionable(0)
+  };
+
+  // states used by template
+  $scope.states = {
+    screenTranslate: function() { return [620 * t9ables.screenTranslate.get() - 310, 0, 2]; },
+    clockTranslate: function() { return [0, 200 * t9ables.clocktranslate.get(), 2]; },
   };
 
   // define icons
@@ -38,13 +46,16 @@ angular.module('integrationApp')
   $scope.icons = {};
   for(var i = 0; i < icons; i++) {
     (function(i){
-      $scope.icons[i] = {};
-      $scope.icons[i].transitionable = new Transitionable(0);
-      $scope.icons[i].translate = function() {
-        return [75 * i + 17, 550 - ( 70 * $scope.icons[i].transitionable.get() ), 0];
+      $scope.icons[i] = {
+        X: 75*i + 17,
+        Y: new Transitionable(0),
+        translate: function() {
+          return [$scope.icons[i].X, 550 - ( 70 * $scope.icons[i].Y.get() ), 2];
+        }
       };
     })(i);
   }
+
   // icon bg colors
   $scope.icons[0].bgCol = '#FA726C';
   $scope.icons[1].bgCol = '#BAD174';
@@ -58,54 +69,38 @@ angular.module('integrationApp')
   $scope.icons[3].icon = 'fa fa-camera';
 
   $scope.inTransitionFunction = function (done) {
-    // set screen
-    screenTransitionable.set(0.5, springTransition1, function() {
-        console.log('screenTranslate finished');
-    });
-    // set icons
-    for(var i = 0; i < icons; i++) {
-      (function(i) {
-        Timer.setTimeout(function() {
-          $scope.icons[i].transitionable.set(1, springTransition2, function() {
-            if(i+1 === icons) {
-              console.log('i\'m done');
-              done();
-            }
-          });
-        }, 500 + (100 * i));
-      })(i);
-    }
+    Timer.setTimeout(function() {
+      // set screen
+      t9ables.screenTranslate.set(0.5, TRANSITIONS.springTransition, function() {
+        // set icons
+        for(var i = 0; i < icons; i++) {
+          (function(i) {
+            Timer.setTimeout(function() {
+              $scope.icons[i].Y.set(1, TRANSITIONS.springTransition2, function() {
+                if(i === icons-1) done();
+              });
+            }, 100*i);
+          })(i);
+        }
+      });
+    }, 800);
   };
 
-  // expose to window for test
-  window.flipperOut = $scope.outTransitionFunction = function (done) {
+  $scope.outTransitionFunction = function (done) {
     // set icons
     for(var i = 0; i < icons; i++) {
       (function(i) {
         Timer.setTimeout(function() {
-          $scope.icons[i].transitionable.set(0, {
-            curve: Easing.inBack,
-            duration: 800
-          }, function() {
-            if(i+1 === icons) {
-              console.log('i\'m done');
-              // set screen
-              screenTransitionable.set(1, {
-                curve: Easing.inOutSine,
-                duration: 400
-              }, function() {
-                console.log('i\'m out');
+          $scope.icons[i].Y.set(0, TRANSITIONS.inBack800, function() {
+            if(i === icons-1) {
+              // set screen after last icon is done transitioning
+              t9ables.screenTranslate.set(1, TRANSITIONS.inOutSine500, function() {
                 done();
               });
             }
           });
-        }, (50 * i) - 50);
+        }, 50*i - 50);
       })(i);
     }
   };
-
-  $scope.flip = function() {
-    console.log('flip');
-    $famous.find('#flipper')[0].flip();
-  }; // not sure if still needed
 });
