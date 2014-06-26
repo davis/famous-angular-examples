@@ -3,7 +3,6 @@ body {
   margin: 0;
 }
 
-
 .phone-frame{
   position: absolute;
   left: 0;
@@ -34,6 +33,7 @@ body {
 
 
 .famous-angular-container {
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -43,7 +43,6 @@ body {
 .background-dark {
   background-color: #303030;
 }
-
 
 .top-triangle {
   width: 0px;
