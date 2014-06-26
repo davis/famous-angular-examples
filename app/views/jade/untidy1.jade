@@ -13,7 +13,7 @@ fa-modifier(fa-scale='states.screenScale' fa-origin='[0.5, 0.5]' fa-align='[0.5,
               i(class='fa fa-arrow-right fa-2x')
           fa-modifier(fa-translate='states.searchTranslate')
             fa-surface#search(fa-z-index='200', fa-background-color='\'white\'', fa-size='[280, 30]', fa-color='\'#222\'', fa-click='expand')
-              i(class='fa fa-search searchbar')
+              i(class='fa fa-search') searchbar
           fa-modifier(fa-translate='states.barsTranslate')
             fa-modifier(ng-repeat='bar in bars', fa-translate='bar.translate' fa-opacity='bar.opacity', fa-rotate-z='bar.rotate')
               fa-surface.icon(fa-z-index='300', fa-background-color='bar.bgCol', fa-size='[undefined, 80]')
