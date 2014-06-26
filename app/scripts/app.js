@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
   .config(function($famousStateProvider, $urlRouterProvider){
    // $urlRouterProvider.otherwise("/lock-screen");
@@ -79,10 +80,12 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
         controller: 'UntidyCtrl1',
         inTransitionFrom: {
           untidy2: 'from.untidy2',
+          'untidy1.menu': 'from.untidymenu',
           default: 'from.default'
         },
         outTransitionTo: {
           untidy2: 'to.untidy2',
+          'untidy1.menu': 'to.untidymenu',
           default: 'to.default'
         }
       })
@@ -98,11 +101,25 @@ angular.module('integrationApp',['famous.angular', 'ui.router','ngAnimate'])
           untidy1: 'to.untidy1',
           default: 'to.default'
         }
+      })
+      .state('untidy1.menu', {
+        url: '/untidy1/menu',
+        templateUrl: 'views/untidymenu.html',
+        controller: 'UntidyMenuCtrl',
+        inTransitionFrom: {
+          untidy1: 'from.untidy1',
+          default: 'from.default'
+        },
+        outTransitionTo: {
+          untidy1: 'to.untidy1',
+          default: 'to.default'
+        }
       });
     })
   .controller('MainCtrl',function($scope, $famousState){
      $scope.changeState = function(state) {
         console.log('clicked');
         $famousState.go(state);
-     }
+     };
   });
+
