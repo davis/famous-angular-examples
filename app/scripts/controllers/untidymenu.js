@@ -22,8 +22,8 @@ angular.module('integrationApp')
 
   // make some useful transitions available
   var TRANSITIONS = {
-    inBack800:        { curve: Easing.inBack, duration: 800 },
-    outBack800:       { curve: Easing.outBack, duration: 800 }
+    inBack800:  { curve: Easing.inBack, duration: 800 },
+    outBack800: { curve: Easing.outBack, duration: 800 }
   };
 
   // intialize transitionables
@@ -34,6 +34,8 @@ angular.module('integrationApp')
   // states used by template
   $scope.states = {
     menuTranslate: function() { return [-285 + 226*t9ables.menuTranslate.get(), 0, 0]; },
+    xRotate: function() { return 720 * t9ables.menuTranslate.get(); },
+    xTranslate: [100, 0 , 0]
   };
 
   // in transitions
