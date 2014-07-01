@@ -47,9 +47,9 @@ angular.module('integrationApp')
       // set screen
       t9ables.screenOpacity.set(1, TRANSITIONS.inOutSine500, function(){
         done();
-        Timer.setTimeout(function() {
-          $famousState.go('untidy1');
-        }, 750);
+        // Timer.setTimeout(function() {
+        //   $famousState.go('untidy1');
+        // }, 750);
       });
     },
     default: function(done) {

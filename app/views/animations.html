@@ -1,7 +1,7 @@
 <fa-modifier fa-translate="[trans.get()*600 - 300, 0, 0]" fa-origin="[0.5, 0.5]" fa-align="[0.5, 0.5]">
   <fa-view id="EnvelopeView" fa-pipe-to="eventHandler">
 
-    <fa-surface fa-size="[undefined, undefined]" class="background-dark">
+    <fa-surface fa-size="[undefined, undefined]" fa-z-index="100" class="background-dark">
     </fa-surface>
 
     <!-- <fa-modifier fa-translate="positions.scrollText" fa-opacity="1 - functionThatReturnsATimelineValueBetween0And1()">
@@ -11,14 +11,14 @@
     <fa-modifier id="wholeThing" fa-size="[sizes.width, sizes.height]" fa-origin="[.5, .5]" fa-align="[.5, .5]">
     
       <fa-modifier fa-transform="testTransform">
-        <fa-surface class="center-square" fa-size="[2 * sizes.triangle + .5, 2 * sizes.triangle + .5]" ></fa-surface>
+        <fa-surface class="center-square" fa-size="[2 * sizes.triangle + .5, 2 * sizes.triangle + .5]" fa-z-index="200"></fa-surface>
       </fa-modifier>
 
       <fa-modifier
         fa-size="[2 * sizes.triangle, sizes.triangle]"
         fa-translate="positions.topTriangle" >
         <fa-modifier id="topMod" fa-origin="[.5, 1]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="210">
             <div class="top-triangle light"></div>
           </fa-surface>
         </fa-modifier>
@@ -27,7 +27,7 @@
         fa-size="[2 * sizes.triangle, sizes.triangle]"
         fa-translate="positions.topTriangleInner" >
         <fa-modifier id="topModInner" fa-origin="[.5, 0]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="220">
             <div class="bottom-triangle"></div>
           </fa-surface>
         </fa-modifier>
@@ -37,7 +37,7 @@
         fa-size="[sizes.triangle, 2 * sizes.triangle]"
         fa-translate="positions.rightTriangle" >
         <fa-modifier id="rightMod" fa-origin="[0, .5]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="210">
             <div class="right-triangle light"></div>
           </fa-surface>
         </fa-modifier>
@@ -46,7 +46,7 @@
         fa-size="[sizes.triangle, 2 * sizes.triangle]"
         fa-translate="positions.rightTriangleInner" >
         <fa-modifier id="rightModInner" fa-origin="[1, .5]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="220">
             <div class="left-triangle"></div>
           </fa-surface>
         </fa-modifier>
@@ -56,7 +56,7 @@
         fa-size="[2 * sizes.triangle, sizes.triangle]"
         fa-translate="positions.bottomTriangle" >
         <fa-modifier id="bottomMod" fa-origin="[.5, 0]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="210">
             <div class="bottom-triangle light"></div>
           </fa-surface>
         </fa-modifier>
@@ -65,7 +65,7 @@
         fa-size="[2 * sizes.triangle, sizes.triangle]"
         fa-translate="positions.bottomTriangleInner" >
         <fa-modifier id="bottomModInner" fa-origin="[.5, 1]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="220">
             <div class="top-triangle"></div>
           </fa-surface>
         </fa-modifier>
@@ -75,7 +75,7 @@
         fa-size="[sizes.triangle, 2 * sizes.triangle]"
         fa-translate="positions.leftTriangle" >
         <fa-modifier id="leftMod" fa-origin="[1, .5]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="210">
             <div class="left-triangle light"></div>
           </fa-surface>
         </fa-modifier>
@@ -84,7 +84,7 @@
         fa-size="[sizes.triangle, 2 * sizes.triangle]"
         fa-translate="positions.leftTriangleInner" >
         <fa-modifier id="leftModInner" fa-origin="[0, .5]"  >
-          <fa-surface>
+          <fa-surface fa-z-index="220">
             <div class="right-triangle"></div>
           </fa-surface>
         </fa-modifier>
@@ -96,7 +96,7 @@
         fa-rotate-z="-.785"
         fa-transform-order="['translate', 'rotateZ']">
         <fa-modifier id="contentMod">
-          <fa-surface class="center-content">
+          <fa-surface class="center-content" fa-z-index="250">
             {{getContent()}}
             <br>
             <br>

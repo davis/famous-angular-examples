@@ -17,9 +17,10 @@ angular.module('integrationApp')
 
   // TODO: get working with clicks
   $scope.handleClick = function($event) {
-    console.log($event.origin)
-    if($event.origin.id === 3) {
+    if($event.origin.classList[0] === 'hamburger') {
       $scope.openMenu();
+    } else if($event.origin.classList[0] === 'arrow') {
+      $famousState.go('untidy2');
     } else {
       $scope.expand();
     }
@@ -39,7 +40,8 @@ angular.module('integrationApp')
 
   // TODO: tie to click
   $scope.openMenu = function() {
-    $famousState.go('untidy1.menu');
+    console.log('open menu');
+    $famousState.go('untidy1menu');
   };
 
   // make some useful transitions available
@@ -150,7 +152,12 @@ angular.module('integrationApp')
         })(i);
       }
     },
-    untidymenu: function(done) {},
+    untidymenu: function(done) {
+      // blur current contents
+      // console.log('hi')
+      // console.log($famous.find('.blurrable'))
+      // $famous.find('.blurrable').addClass('blur');
+    },
     default: function (done) {
       // set bars
       for(var i = 0; i < bars; i++) {

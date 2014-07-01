@@ -47,15 +47,15 @@ angular.module('integrationApp')
     }
 
     $scope.positions = {
-      numberPadGridLayout: [.085 * _width, 150, 500],
-      emergencyText: [.085 * _width, _height - 36, 2],
-      deleteText: [-(.085 * _width), _height - 36, 2],
-      enterPasscodeText: [0, 45, 2],
-      inputDotsGridLayout: [.3 * _width, 85, 2],
-      slideToUnlockText: [0, _height - 100, 2],
-      clock: [0, 28, 2],
-      calendar: [0, 130, 2],
-      topCapsule: [143, 0, 2]
+      numberPadGridLayout: [.085 * _width, 150, 0],
+      emergencyText: [.085 * _width, _height - 36, 0],
+      deleteText: [-(.085 * _width), _height - 36, 0],
+      enterPasscodeText: [0, 45, 0],
+      inputDotsGridLayout: [.3 * _width, 85, 0],
+      slideToUnlockText: [0, _height - 100, 0],
+      clock: [0, 28, 0],
+      calendar: [0, 130, 0],
+      topCapsule: [143, 0, 0]
     }
 
     $scope.numberButtons = [

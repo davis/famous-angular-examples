@@ -1,17 +1,17 @@
 <div class="lock-screen" ng-controller="LockScreenCtrl">
     <fa-view id="background-image" fa-pipe-to="enginePipe">
       <fa-modifier id="clear-background">
-        <fa-image-surface fa-image-url="images/lock-screen/monkey.jpg" fa-size="sizes.bgImage">
+        <fa-image-surface fa-image-url="images/lock-screen/monkey.jpg" fa-size="sizes.bgImage" fa-z-index="100">
         </fa-image-surface>
       </fa-modifier>
       <fa-modifier id="blurred-background" fa-opacity="bgOpacity">
-        <fa-image-surface fa-size="sizes.bgImage" fa-image-url="images/lock-screen/monkey-blurred.jpg">
+        <fa-image-surface fa-size="sizes.bgImage" fa-image-url="images/lock-screen/monkey-blurred.jpg" fa-z-index="101">
         </fa-image-surface>
       </fa-modifier>
     </fa-view>
 
     <fa-modifier id="top-capsule" fa-translate="positions.topCapsule" fa-opacity=".5">
-      <fa-surface fa-size="sizes.topCapsule">
+      <fa-surface fa-size="sizes.topCapsule" fa-z-index="200">
         <img src="images/lock-screen/capsule.svg" />
       </fa-surface>
     </fa-modifier>
@@ -31,12 +31,12 @@
 
         <!-- Header -->
         <fa-modifier fa-translate="positions.enterPasscodeText" fa-size="sizes.enterPasscodeSurface">
-          <fa-surface class="enter-passcode">Enter Passcode</fa-surface>
+          <fa-surface class="enter-passcode" fa-z-index="200">Enter Passcode</fa-surface>
         </fa-modifier>
 
         <fa-modifier id="dot-container" fa-translate="positions.inputDotsGridLayout" fa-size="sizes.inputDotsGridLayout">
           <fa-grid-layout fa-options="options.inputDotsGridLayout">
-            <fa-surface class="input-dot" fa-size="sizes.inputDot" ng-repeat="dot in inputDots">
+            <fa-surface class="input-dot" fa-size="sizes.inputDot" ng-repeat="dot in inputDots" fa-z-index="200">
               <img ng-if="dot.val" src="images/lock-screen/input-dot-filled.svg" />
               <img ng-if="!dot.val" src="images/lock-screen/input-dot-empty.svg" />
             </fa-surface>
@@ -73,7 +73,7 @@
           <fa-grid-layout fa-options="options.numberPadGridLayout">
             <fa-view ng-repeat="numberButton in numberButtons track by numberButton.number" fa-index="$index">
               <fa-modifier fa-opacity=".8">
-                <fa-surface ng-if="numberButton.number !== ''" fa-size="sizes.numberButton" >
+                <fa-surface ng-if="numberButton.number !== ''" fa-size="sizes.numberButton" fa-z-index="200">
                   <img class="ring" src="images/lock-screen/number-button-outline.svg" />
 
                 </fa-surface>
@@ -82,7 +82,7 @@
 
               <!-- Flash-on-tap overlay -->
               <fa-modifier fa-opacity="0" id="{{'number-button-' + $index}}" fa-translate="[0,0,50]">
-                <fa-surface ng-if="numberButton.number !== ''" fa-size="sizes.numberButton" fa-tap="buttonTap($index, numberButton)" fa-click="buttonTap($index, numberButton)" fa-pipe-to="enginePipe">
+                <fa-surface ng-if="numberButton.number !== ''" fa-size="sizes.numberButton" fa-tap="buttonTap($index, numberButton)" fa-click="buttonTap($index, numberButton)" fa-pipe-to="enginePipe" fa-z-index="200">
                   <img class="ring" src="images/lock-screen/number-button-fill.svg" />
                 </fa-surface>
               </fa-modifier>
@@ -103,7 +103,7 @@
                           timelineUpperBound="1"/>
               </fa-animation>
 
-              <fa-surface fa-size="sizes.numberButton" class="number-button">
+              <fa-surface fa-size="sizes.numberButton" class="number-button" fa-z-index="200">
                 <div class="number">{{numberButton.number}}</div>
                 <div class="letters">{{numberButton.letters}}</div>
               </fa-surface>
@@ -113,10 +113,10 @@
 
         <!-- Footer text buttons -->
         <fa-modifier fa-size="sizes.emergencyText" fa-translate="positions.emergencyText">
-          <fa-surface class="no-pointer">Emergency</fa-surface>
+          <fa-surface class="no-pointer" fa-z-index="200">Emergency</fa-surface>
         </fa-modifier>
         <fa-modifier fa-origin="[1,0]" fa-translate="positions.deleteText">
-          <fa-surface fa-tap="unshiftInputDots()" fa-click="unshiftInputDots()"><div style="text-align: right">Delete</div></fa-surface>
+          <fa-surface fa-tap="unshiftInputDots()" fa-click="unshiftInputDots()" fa-z-index="200"><div style="text-align: right">Delete</div></fa-surface>
         </fa-modifier>
       </fa-view>
 
@@ -125,15 +125,15 @@
         
         <!-- Clock and calendar -->
         <fa-modifier fa-translate="positions.clock">
-          <fa-surface fa-size="sizes.clock" class="clock">8:23</fa-surface>
+          <fa-surface fa-size="sizes.clock" class="clock" fa-z-index="200">8:23</fa-surface>
         </fa-modifier>
         <fa-modifier fa-translate="positions.calendar">
-          <fa-surface fa-size="sizes.calendar" class="calendar">Sunday, April 27</fa-surface>
+          <fa-surface fa-size="sizes.calendar" class="calendar" fa-z-index="200">Sunday, April 27</fa-surface>
         </fa-modifier>
 
         <!-- Slide to unlock text -->
         <fa-modifier fa-translate="positions.slideToUnlockText" fa-opacity=".5">
-          <fa-surface fa-pipe-to="enginePipe">
+          <fa-surface fa-pipe-to="enginePipe" fa-z-index="200">
             <div class="slide-to-unlock">
               <img class="mask" src="images/lock-screen/slide-to-unlock-mask-white.svg" />
             </div>
