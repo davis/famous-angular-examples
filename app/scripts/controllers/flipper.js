@@ -4,7 +4,7 @@
 
 angular.module('integrationApp')
 
-.controller('FlipperCtrl', function ($scope, $famous, $timeout) {
+.controller('FlipperCtrl', function ($scope, $famous, $famousState, $timeout) {
   var Transitionable   = $famous['famous/transitions/Transitionable'];
   var SpringTransition = $famous['famous/transitions/SpringTransition'];
   var EventHandler     = $famous['famous/core/EventHandler'];
@@ -16,8 +16,9 @@ angular.module('integrationApp')
   $scope.evt = new EventHandler();
 
   window.flip = $scope.flip = function() {
-    console.log('flip');
-    $famous.find('#flipper')[0].flip();
+    // console.log('flip');
+    // $famous.find('#flipper')[0].flip();
+    $famousState.go('untidy1')
   };
 
   // make some useful transitions available
