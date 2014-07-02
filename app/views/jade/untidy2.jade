@@ -3,6 +3,8 @@ fa-modifier(fa-opacity='states.screenOpacity', fa-scale='states.screenScale', fa
       fa-flipper#flipper
         fa-view#front
           fa-modifier(fa-translate='states.loadingTranslate')
-            fa-surface#loading(fa-z-index='200', fa-background-color='\'#222\'', fa-size='[100, 100]', fa-color='\'white\'') loading
+            fa-surface#loading(fa-z-index='200', fa-background-color='\'#222\'', fa-size='[100, 100]')
+            fa-modifier(fa-origin='[0.5, 0.5]', fa-align='[0.5, 0.5]')
+              fa-surface#loading(fa-z-index='201',fa-size='[true, true]', fa-color='\'white\'') loading
         fa-view#back
           fa-surface
